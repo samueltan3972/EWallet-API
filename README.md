@@ -11,7 +11,7 @@ You know what is this.
   * To try out practically, go to [this](https://guides.github.com/activities/hello-world/)
   * To learn how to really contribute to this project, go to [this](https://github.com/firstcontributions/first-contributions)
 
-3. Login and Fork this project. Click the button. ![Fork](doc/fork.png).
+3. Login and Fork this project. Click the button. ![Fork](doc/fork.PNG).
 
 ### Prerequisites
 
