@@ -41,6 +41,10 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+header('Access-Control-Allow-Origin: '.getenv('CORS_ORIGIN'));
+header('Access-Control-Allow-Methods: *');
+header('Access-Control-Allow-Headers: *');
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
