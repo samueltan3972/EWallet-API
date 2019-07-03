@@ -23,7 +23,7 @@ class WalletController extends Controller
   public function pay(Request $request){
     $sender_wallet_addr = $this->user()->user_wallet_addr;
     $receiver_wallet_addr = $request->receiver_wallet_addr;
-    $amount = $request->amount;
+    $amount = (double) $request->amount;
 
     $status = DB::select('CALL `ewallet`.`spMakeTransaction`(?, ?, ?)',array($sender_wallet_addr, $receiver_wallet_addr, $amount));
 
@@ -33,11 +33,28 @@ class WalletController extends Controller
   public function topup(Request $request){
     $sender_wallet_addr = env('ADMIN_ADDR', ''); // admin wallet address
     $receiver_wallet_addr = $this->user()->user_wallet_addr;
-    $amount = $request->amount;
+    $amount = (double) $request->amount;
 
     $status = DB::select('CALL `ewallet`.`spMakeTransaction`(?, ?, ?)',array($sender_wallet_addr, $receiver_wallet_addr, $amount));
 
     return $status;
+  }
+
+  public function checkIsValidAddress(Request $request){
+    $wallet_addr = $request->wallet_addr;
+
+    $id = DB::table('users')
+            ->select('id')
+            ->where('user_wallet_addr', $wallet_addr)
+            ->first();
+
+    $status = false;
+
+    if(!empty($id)){
+      $status = true;
+    }
+
+    return response()->json(['status' => $status]);
   }
 
   private function user(){

@@ -26,6 +26,7 @@ Route::post('register', 'Auth\RegisterController@register');
 //protected routes
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('logout', 'Auth\LoginController@logout');
+    Route::get('getUserObj', 'HomeController@getUserObj');
 });
 
 /**
@@ -35,7 +36,8 @@ Route::group([
   'middleware' => 'auth:api',
   'prefix' => 'wallet'
 ], function() {
-    Route::post('checkBalance', 'WalletController@checkBalance');
+    Route::get('checkBalance', 'WalletController@checkBalance');
     Route::post('pay', 'WalletController@pay');
     Route::post('topup', 'WalletController@topup');
+    Route::post('checkIsValidAddress', 'WalletController@checkIsValidAddress');
 });
